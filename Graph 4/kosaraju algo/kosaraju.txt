@@ -1,0 +1,55 @@
+class Solution {
+public:
+    void dfsFill(int node, vector<vector<int>>& adj, vector<bool>& visited, stack<int>& st) {
+        visited[node] = true;
+        for (int adjNode : adj[node]) {
+            if (!visited[adjNode]) {
+                dfsFill(adjNode, adj, visited, st);
+            }
+        }
+        st.push(node);
+    }
+
+    void dfsTraversal(int node, vector<vector<int>>& adjReversed, vector<bool>& visited) {
+        visited[node] = true;
+        for (int adjNode : adjReversed[node]) {
+            if (!visited[adjNode]) {
+                dfsTraversal(adjNode, adjReversed, visited);
+            }
+        }
+    }
+
+    int kosaraju(int V, vector<vector<int>>& adj) {
+        stack<int> st;
+        vector<bool> visited(V, false);
+        
+        // Fill stack with order of completion times
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                dfsFill(i, adj, visited, st);
+            }
+        }
+        
+        // Create reverse graph
+        vector<vector<int>> adjReversed(V);
+        for (int u = 0; u < V; u++) {
+            for (int v : adj[u]) {
+                adjReversed[v].push_back(u);
+            }
+        }
+        
+        // Process all vertices in order defined by Stack
+        fill(visited.begin(), visited.end(), false);
+        int countSCC = 0;
+        while (!st.empty()) {
+            int node = st.top();
+            st.pop();
+            if (!visited[node]) {
+                dfsTraversal(node, adjReversed, visited);
+                countSCC++;
+            }
+        }
+
+        return countSCC;
+    }
+};
