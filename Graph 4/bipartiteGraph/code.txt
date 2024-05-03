@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool bfsCheckBipartite(vector<vector<int>>& graph, vector<int>& colors, int start) {
+        colors[start] = 0;
+        queue<int> queue;
+        queue.push(start);
+        
+        while (!queue.empty()) {
+            int current = queue.front();
+            queue.pop();
+            for (int neighbor : graph[current]) {
+                if (colors[neighbor] == -1) {  // If not colored
+                    queue.push(neighbor);
+                    colors[neighbor] = 1 - colors[current];  // Alternate color
+                } else if (colors[current] == colors[neighbor]) {  // If same color found
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    bool isBipartite(vector<vector<int>>& graph) {
+        vector<int> colors(graph.size(), -1);  // -1 means no color assigned
+        for (int i = 0; i < graph.size(); i++) {
+            if (colors[i] == -1) {  // If not colored
+                if (!bfsCheckBipartite(graph, colors, i)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};

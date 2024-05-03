@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int bfs(int source, int destination, vector<unordered_set<int>>& graph) {
+        queue<int> queue;
+        vector<int> visited(graph.size(), 0);
+        visited[source] = 1;
+        queue.push(source);
+        int level = 1;
+        
+        while (!queue.empty()) {
+            int levelSize = queue.size();
+            while (levelSize--) {
+                int current = queue.front();
+                queue.pop();
+                if (current == destination) {
+                    return level;
+                }
+                for (int neighbor : graph[current]) {
+                    if (!visited[neighbor]) {
+                        visited[neighbor] = 1;
+                        queue.push(neighbor);
+                    }
+                }
+            }
+            level++;
+        }
+        return INT_MAX;
+    }
+
+    int findShortestCycle(int nodeCount, vector<vector<int>>& edges) {
+        vector<unordered_set<int>> graph(nodeCount);
+        for (auto& edge : edges) {
+            graph[edge[0]].insert(edge[1]);
+            graph[edge[1]].insert(edge[0]);
+        }
+        int shortestCycle = INT_MAX;
+        for (int i = 0; i < edges.size(); i++) {
+            int node1 = edges[i][0], node2 = edges[i][1];
+            graph[node1].erase(node2);
+            graph[node2].erase(node1);
+            shortestCycle = min(shortestCycle, bfs(node1, node2, graph) + 1);
+            graph[node1].insert(node2);
+            graph[node2].insert(node1);
+        }
+        return shortestCycle == INT_MAX ? -1 : shortestCycle;
+    }
+};

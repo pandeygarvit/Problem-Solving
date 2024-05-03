@@ -1,0 +1,28 @@
+class Solution {
+public:
+    Node* cloneNode(Node* original, unordered_map<Node*, Node*>& clonedNodes) {
+        Node* clone = new Node(original->val);
+        clonedNodes[original] = clone;
+        
+        vector<Node*> clonedNeighbors;
+        for (auto neighbor : original->neighbors) {
+            if (clonedNodes.count(neighbor)) {
+                clonedNeighbors.push_back(clonedNodes[neighbor]);
+            } else {
+                clonedNeighbors.push_back(cloneNode(neighbor, clonedNodes));
+            }
+        }
+        clone->neighbors = clonedNeighbors;
+        return clone;
+    }
+
+    Node* cloneGraph(Node* root) {
+        if (!root) return nullptr;
+        if (root->neighbors.empty()) {
+            return new Node(root->val);
+        }
+
+        unordered_map<Node*, Node*> clonedNodes;
+        return cloneNode(root, clonedNodes);
+    }
+};

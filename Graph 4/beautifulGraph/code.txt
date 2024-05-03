@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 998244353;
+vector<int> powerOfTwoMod;
+
+void generatePowerOfTwoMod() {
+    powerOfTwoMod.push_back(1);  // initial value for 2^0 % MOD
+    for (int i = 1; i < 300009; ++i) {
+        powerOfTwoMod.push_back((powerOfTwoMod.back() * 2) % MOD);
+    }
+}
+
+bool canBipartite(int node, vector<vector<int>>& graph, vector<int>& color, int& count1, int& count2) {
+    if (color[node] == -1) {
+        color[node] = 1;
+        count1++;
+    }
+    bool isValid = true;
+    for (int neighbor : graph[node]) {
+        if (color[neighbor] == -1) {
+            color[neighbor] = 1 - color[node];
+            if (color[neighbor])
+                count1++;
+            else
+                count2++;
+            isValid &= canBipartite(neighbor, graph, color, count1, count2);
+        } else if (color[neighbor] == color[node]) {
+            isValid = false;
+        }
+    }
+    return isValid;
+}
+
+int main() {
+    int testCases;
+    cin >> testCases;
+    
+    generatePowerOfTwoMod();
+    
+    while (testCases--) {
+        int numVertices, numEdges;
+        cin >> numVertices >> numEdges;
+        
+        vector<int> visited(numVertices, -1);
+        vector<vector<int>> adjacencyList(numVertices);
+        
+        while (numEdges--) {
+            int u, v;
+            cin >> u >> v;
+            adjacencyList[u - 1].push_back(v - 1);
+            adjacencyList[v - 1].push_back(u - 1);
+        }
+        
+        long long result = 1;
+        for (int i = 0; i < numVertices; i++) {
+            if (visited[i] == -1) {
+                int group1 = 0, group2 = 0;
+                bool isBipartite = canBipartite(i, adjacencyList, visited, group1, group2);
+                if (!isBipartite) {
+                    result = 0;
+                    break;
+                }
+                int waysForGroup1 = powerOfTwoMod[group1] % MOD;
+                int waysForGroup2 = powerOfTwoMod[group2] % MOD;
+                result = (result * ((waysForGroup1 + waysForGroup2) % MOD)) % MOD;
+            }
+        }
+        
+        cout << result << endl;
+    }
+    return 0;
+}
