@@ -1,0 +1,118 @@
+//Recursion
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+  int longestIncreasingSubsequence(vector<int>& numbers, int currentIndex, int previousIndex)
+  {
+    if(currentIndex == numbers.size())
+      return 0;
+
+    int notTakingCurrent = longestIncreasingSubsequence(numbers, currentIndex + 1, previousIndex);
+    int takingCurrent = 0;
+    if(previousIndex == -1 || numbers[previousIndex] < numbers[currentIndex])
+    {
+      takingCurrent = 1 + longestIncreasingSubsequence(numbers, currentIndex + 1, currentIndex);
+    }
+    return max(takingCurrent, notTakingCurrent);
+  }
+
+  int lengthOfLIS(vector<int>& nums) {
+    return longestIncreasingSubsequence(nums, 0, -1);
+  }
+};
+
+// memoisation
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+  int longestIncreasingSubsequence(vector<int>& numbers, int currentIndex, int previousIndex, vector<vector<int>>& memoization)
+  {
+    if(currentIndex == numbers.size())
+      return 0;
+
+    if(memoization[currentIndex + 1][previousIndex + 1] != -1)
+      return memoization[currentIndex + 1][previousIndex + 1];
+
+    int notTakingCurrent = longestIncreasingSubsequence(numbers, currentIndex + 1, previousIndex, memoization);
+    int takingCurrent = 0;
+    if(previousIndex == -1 || numbers[previousIndex] < numbers[currentIndex])
+    {
+      takingCurrent = 1 + longestIncreasingSubsequence(numbers, currentIndex + 1, currentIndex, memoization);
+    }
+    return memoization[currentIndex + 1][previousIndex + 1] = max(takingCurrent, notTakingCurrent);
+  }
+
+  int lengthOfLIS(vector<int>& nums) {
+    vector<vector<int>> memoization(nums.size() + 1, vector<int>(nums.size() + 1, -1));
+    return longestIncreasingSubsequence(nums, 0, -1, memoization);
+  }
+};
+
+// tabulation 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+  int lengthOfLongestIncreasingSubsequence(vector<int>& nums) {
+    int size = nums.size();
+    if (size == 0) return 0;
+
+    vector<int> longestSubsequenceLength(size, 1);
+    int longestLength = 1;
+
+    for(int i = 1; i < size; i++) {
+      for(int j = 0; j < i; j++) {
+        if(nums[i] > nums[j]) {
+          longestSubsequenceLength[i] = max(longestSubsequenceLength[i], longestSubsequenceLength[j] + 1);
+        }
+      }
+      longestLength = max(longestLength, longestSubsequenceLength[i]);
+    }
+
+    return longestLength;
+  }
+};
+
+// binary search
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+  int binarySearchLowerBound(vector<int> arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    while (left <= right) {
+      int mid = left + (right - left) / 2;
+      if (arr[mid] >= target) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
+    }
+    return left;
+  }
+    
+  int lengthOfLIS(vector<int>& nums) {
+    vector<int> LIS;
+    LIS.push_back(nums[0]);
+    for(int i = 1; i < nums.size(); i++) {
+      int n = LIS.size();
+      if(LIS[n - 1] < nums[i]) {
+        LIS.push_back(nums[i]);
+      } else {
+        int j = binarySearchLowerBound(LIS, nums[i]);
+        LIS[j] = nums[i];
+      }
+    }
+    return LIS.size();
+  }
+};

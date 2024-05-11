@@ -1,0 +1,42 @@
+class Solution {
+public:
+  int calculateMinimumHP(vector<vector<int>>& dungeon) {
+    int rows = dungeon.size();
+    int cols = dungeon[0].size();
+    vector<vector<int>> dp(rows, vector<int>(cols, -1));
+
+    return solve(dungeon, 0, 0, dp);
+  }
+
+private:
+  int solve(vector<vector<int>>& dungeon, int row, int col, vector<vector<int>>& dp) {
+    int m = dungeon.size() - 1;
+    int n = dungeon[0].size() - 1;
+
+    if (row == m && col == n) {
+      if (dungeon[row][col] >= 0)
+        return 1;
+      else
+        return abs(dungeon[row][col]) + 1;
+    }
+
+    if (dp[row][col] != -1)
+      return dp[row][col];
+
+    int right = 1e8;
+    if (col + 1 <= n)
+      right = solve(dungeon, row, col + 1, dp);
+
+    int bottom = 1e8;
+    if (row + 1 <= m)
+      bottom = solve(dungeon, row + 1, col, dp);
+
+    if (dungeon[row][col] <= 0) {
+      dp[row][col] = abs(dungeon[row][col]) + min(right, bottom);
+    } else {
+      dp[row][col] = max(1, min(right, bottom) - dungeon[row][col]);
+    }
+
+    return dp[row][col];
+  }
+};
