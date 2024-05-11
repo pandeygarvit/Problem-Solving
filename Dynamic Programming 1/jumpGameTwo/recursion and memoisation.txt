@@ -1,0 +1,25 @@
+  public int jump(int[] nums) {
+    if (nums.length == 1) {
+      return 0;
+    }
+    
+    int[] minJump = {10001};
+    int[] mem = new int[nums.length];
+    Arrays.fill(mem, -1);
+    solve(nums, 0, minJump, mem);
+    return minJump[0];
+  }
+
+  private int solve(int[] nums, int pos, int[] minJump, int[] mem) {
+    if (pos >= nums.length - 1) {
+      return 0;
+    }
+    if (mem[pos] != -1) {
+      return mem[pos];
+    }
+    for (int i = 1; i <= nums[pos]; i++) {
+      minJump[0] = Math.min(minJump[0], 1 + solve(nums, pos+i, minJump));
+    }
+    mem[pos] = minJump[0];
+    return minJump[0];
+  }
