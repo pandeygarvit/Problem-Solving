@@ -1,0 +1,46 @@
+Process - Instance of a program in execution
+
+Operating System acts as an interface between the user and the computer hardware. It is responsible for memory management, process management, i/o operations.
+
+The operating system manages memory by allocating and deallocating resources effeciently.
+
+Three different states of process - ready, running and wait
+
+The running state means that the process has all the resources it needs for execution and it has been given permission by the operating system to use the processor.
+
+Thread - "single sequence stream with process" - single sequence stream within a process, a single sequential flow of activities being executed in a process. Thread is a subset of a process.
+
+Thrashing - performance of a computer system failes. Occurs because of page faults.
+
+Kernel - OS that manages the operations of computers and operating system. It uses inter process communication and system call. Core componenet of OS.
+
+System Call - process requesting memory or CPU time to OS
+
+Scheduling Algos -
+FCFS, SJN, Priority Scheduling, Shortest Time Remaining, Round Robin, Multiple Level Queues
+
+Banker's Algo - Resource Allocation and Deadlock avoidance algorithm
+
+Overlays -  The process of transferring a block of program code (a process) on other data into internal memory, replacing what is already stored.
+
+Fragmentation - Internal Fragmentation picture on gfg
+To fix this we use paging
+
+Paging - Technique used for non-contiguous memory allocation
+
+multi threading -> multi processing -> multi programming -> multi tasking
+
+Spooling - Putting jobs in a buffer, where a device can access them when it is ready
+
+Interrupts - Signal emitted by hardware or software when a process or an event needs immediate attention
+
+Interrupt Service Routines - I/O devices in one of the bus control lines are dedicated to this purpose.
+
+Pipe - technique for interprocess communication. Output of one process is input for another process
+
+Semaphores - are integer variables that are used to solve critical section problem by using two atomic operations - wait() and signal()
+
+Bootstrapping is the process of loading a set of instructions when a computer is first turned on or booted.
+
+
+
