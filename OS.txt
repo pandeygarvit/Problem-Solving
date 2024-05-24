@@ -42,5 +42,15 @@ Semaphores - are integer variables that are used to solve critical section probl
 
 Bootstrapping is the process of loading a set of instructions when a computer is first turned on or booted.
 
+Methods of Inter Process Communications-
+1. pipes
+2. named pipes
+3. message queuing
+4. semaphores
+5. shared memory
+6. sockets
 
+Preemptive Scheduling v/s non pre-emptive scheduling:
+Preemptive scheduling is when CPU is allocated to the process for limited time. In preemptive scheduling we can temporarily suspend a process. i.e. we have an overhead of switching process from process state to ready state.
 
+Zombie Process:
