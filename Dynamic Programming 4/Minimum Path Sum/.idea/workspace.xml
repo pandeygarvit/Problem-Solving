@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4df6e220-6594-483e-ae98-21e561c59a71" name="Changes" comment="" />
+    <list default="true" id="943bcd54-2867-4ae8-be6f-accca8ab398e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Unique Path 2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Unique Path 2/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,9 +15,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
   "associatedIndex": 8
 }]]></component>
-  <component name="ProjectId" id="2glOIjOxTxhc3PwWDci8t82s2Ck" />
+  <component name="ProjectId" id="2gvgvVBPJIr9EDPTM5KsG6ClHtW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -28,11 +33,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4df6e220-6594-483e-ae98-21e561c59a71" name="Changes" comment="" />
-      <created>1716268620865</created>
+      <changelist id="943bcd54-2867-4ae8-be6f-accca8ab398e" name="Changes" comment="" />
+      <created>1716583696764</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1716268620865</updated>
+      <updated>1716583696764</updated>
     </task>
     <servers />
   </component>
